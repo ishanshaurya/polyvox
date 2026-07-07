@@ -1,0 +1,17 @@
+[
+  {
+    "id": "clear_en",
+    "language": "en",
+    "text": "Hello, welcome to Acme Health. My name is Alex. How can I help you today? I would like to book an appointment for my child with a pediatrician. Certainly, I can help with that. Which location works best for you?"
+  },
+  {
+    "id": "short_fail",
+    "language": "en",
+    "text": "Hello? Yes. Okay thanks."
+  },
+  {
+    "id": "gibberish_fail",
+    "language": "en",
+    "text": "asdf qwer zxcv asdf qwer zxcv asdf qwer zxcv"
+  }
+]
