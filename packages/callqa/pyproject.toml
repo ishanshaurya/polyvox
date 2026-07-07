@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "callqa"
+version = "0.1.0"
+description = "Call center QA pipeline — transcribe, analyze, report"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic>=0.40.0",
+  "assemblyai>=0.40.0",
+  "faster-whisper>=1.0.0",
+  "groq>=0.13.0",
+  "openpyxl>=3.1.0",
+  "pandas>=2.0.0",
+  "pyyaml>=6.0",
+  "requests>=2.31.0",
+]
+
+[project.scripts]
+callqa-fetch = "callqa.ingestion.fetch:main"
+callqa-transcribe = "callqa.jobs.transcribe:main"
+callqa-analyze = "callqa.jobs.analyze:main"
+callqa-report = "callqa.jobs.report:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["callqa*"]

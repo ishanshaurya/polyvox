@@ -1,0 +1,155 @@
+analysis_template: healthcare
+report_template: templates_v1
+
+csv_path: "./data/calls.csv"
+recordings_folder: "./recordings"
+output_folder: "./outputs"
+analysis_profile: generic
+
+pilot_agents:
+  - Agent Alpha
+  - Agent Beta
+  - Agent Gamma
+
+duration_buckets:
+  b23: [120, 179]
+  b46: [240, 359]
+  b7p: [420, 9999]
+
+fetch_limit: 21
+batch_size: 7
+calls_per_agent: 7
+calls_per_bucket:
+  b23: 2
+  b46: 2
+  b7p: 3
+
+agent_language_hints:
+  "Agent Alpha": en
+  "Agent Beta": hi
+  "Agent Gamma": te
+
+file_extensions: [".mp3"]
+
+transcription_cascade:
+  - assemblyai
+  - groq
+  - faster-whisper
+transcription_workers: 3
+transcription_engine: groq
+assemblyai_speech_models:
+  - universal-3-pro
+  - universal-2
+assemblyai_keyterms_prompt:
+  - "Acme Health"
+  - "appointment"
+  - "doctor"
+groq_whisper_model: whisper-large-v3-turbo
+groq_max_retries: 2
+groq_max_backoff_seconds: 8
+groq_api_key: ""
+whisper_model: large-v3
+whisper_language: null
+whisper_initial_prompt: "Healthcare call center. English, Hindi, Telugu. Appointments and doctor scheduling."
+whisper_beam_size: 5
+whisper_language_prompts:
+  en: "Healthcare call center. English. Appointment booking and doctor names."
+  te: "Healthcare call center. Telugu. Appointments and doctors."
+  hi: "Healthcare call center. Hindi. Appointments and doctors."
+  ta: "Healthcare call center. Tamil. Appointments and doctors."
+
+asr_min_words: 20
+asr_max_gibberish_score: 0.25
+asr_min_wpm: 25
+asr_min_words_per_minute: 25
+asr_max_repetition: 0.25
+asr_repetition_ngram: 4
+asr_retry_on_fail: true
+asr_dedupe_ngrams: true
+unclear_recording_min_words: 20
+
+whisper_vad_parameters_retry:
+  min_silence_duration_ms: 2000
+  speech_pad_ms: 400
+
+agent_eval_min_calls: 3
+
+anthropic_api_key: ""
+
+asr_thresholds:
+  default:
+    min_words: 20
+    min_wpm: 25
+    max_gibberish: 0.25
+    max_repetition: 0.25
+  en:
+    min_words: 20
+    min_wpm: 25
+    max_gibberish: 0.35
+    max_repetition: 0.15
+  te:
+    min_words: 50
+    min_wpm: 35
+    max_gibberish: 0.10
+    max_repetition: 0.25
+    max_latin_ratio: 0.60
+  hi:
+    min_words: 45
+    min_wpm: 32
+    max_gibberish: 0.10
+    max_repetition: 0.25
+    max_latin_ratio: 0.60
+  ta:
+    min_words: 45
+    min_wpm: 32
+    max_gibberish: 0.10
+    max_repetition: 0.25
+    max_latin_ratio: 0.60
+
+claude_model: "claude-sonnet-4-5"
+analysis_workers: 3
+
+rating_bands:
+  5: 85
+  4: 70
+  3: 55
+  2: 40
+  1: 0
+
+training_modules:
+  - "Patient Communication Fundamentals"
+  - "Empathy & Emotional Intelligence in Healthcare"
+  - "De-escalation & Conflict Resolution"
+  - "Active Listening Skills"
+  - "Professional Conduct & Telephone Etiquette"
+  - "Handling Complaints & Escalations"
+  - "Clarity & Structure in Patient Instructions"
+
+kpis:
+  - name: Call Opening & Closing
+    weight: 12
+    description: "Standard greeting and professional closing with offer of further help."
+  - name: Tone and Energy
+    weight: 11
+    description: "Appropriate enthusiasm and engagement; not flat or robotic."
+  - name: Patient Friendliness
+    weight: 11
+    description: "Warm, welcoming tone; patient feels valued."
+  - name: Empathy
+    weight: 11
+    description: "Acknowledges patient feelings before solutions."
+  - name: Active Listening
+    weight: 11
+    description: "Does not interrupt; asks clarifying questions."
+  - name: Clarity of Communication
+    weight: 11
+    description: "Clear instructions and next steps in plain language."
+  - name: Problem Resolution
+    weight: 11
+    description: "Issue resolved or appropriately escalated with follow-up."
+  - name: Professionalism
+    weight: 11
+    description: "Professional conduct and boundaries throughout."
+  - name: Language & Tone
+    weight: 11
+    description: "Respectful language; no rudeness or dismissiveness."
