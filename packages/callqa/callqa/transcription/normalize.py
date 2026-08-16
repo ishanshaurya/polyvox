@@ -37,8 +37,11 @@ def _echo_phrases(cfg: dict) -> list[str]:
         "Praise our love",
         "When the children come below",
         "Can't I hear a song",
-        "Rainbow Children Hospital Hindi English Telugu",
     })
+    # Optional client-specific echo phrases from config
+    for extra in cfg.get("asr_echo_phrases") or []:
+        if extra:
+            phrases.add(str(extra))
     return sorted((p for p in phrases if p), key=len, reverse=True)
 
 

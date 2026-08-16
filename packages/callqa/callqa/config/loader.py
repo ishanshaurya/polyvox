@@ -51,8 +51,10 @@ def _resolve_template_name(cfg: dict) -> str | None:
     profile = (cfg.get("analysis_profile") or "").lower()
     if profile == "kims":
         return "kims"
-    if profile == "generic":
+    if profile in {"healthcare", "health"}:
         return "healthcare"
+    if profile == "generic":
+        return "generic"
     return None
 
 

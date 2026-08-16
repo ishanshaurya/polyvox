@@ -461,7 +461,7 @@ def run_fetch(cfg: dict, *, dry_run: bool = False) -> None:
         stem = build_stem(agent, bucket, call_date, row)
         batch = i // batch_size + 1
         disp = row.get("Disposition", "")
-        outcome = disposition.disposition_to_outcome(disp)
+        outcome = disposition.disposition_to_outcome(disp, cfg)
 
         meta = {
             "stem": stem,
@@ -469,7 +469,8 @@ def run_fetch(cfg: dict, *, dry_run: bool = False) -> None:
             "agent_name": agent,
             "agent_id": row.get("Agent ID", ""),
             "center": row.get("Location", ""),
-            "hospital": cfg.get("hospital_name", "Acme Health"),
+            "hospital": cfg.get("site_name") or cfg.get("hospital_name") or "Acme Org",
+            "site": cfg.get("site_name") or cfg.get("hospital_name") or "Acme Org",
             "call_date": call_date,
             "talk_time": row.get("Talk Time", ""),
             "talk_time_seconds": row["_talk_secs"],

@@ -20,6 +20,9 @@ These came out of conversation and are locked. Listed here so you can see them i
 | 4 | Product is vertical-neutral; healthcare becomes one rubric pack | [0004](decisions/0004-vertical-neutral-rubric-packs.md) |
 | 5 | Web is the primary report surface; Excel becomes an export | [0005](decisions/0005-web-primary-excel-export.md) |
 | 6 | Project skills committed to the repo for cloud agents | [0006](decisions/0006-repo-skills-for-cloud-agents.md) |
+| 7 | Intake = URL+ZIP; second rubric = generic; Phase 1 UI = API+shell | [0007](decisions/0007-phase0-intake-rubric-ui.md) |
+
+**Also deferred (not blocking Phase 0–1):** C4 legacy 7 workbooks — decide with output work later.
 
 ---
 

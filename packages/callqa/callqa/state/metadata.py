@@ -1,11 +1,10 @@
-"""Call metadata resolution — sidecar-first, KIMS filename fallback."""
+"""Call metadata resolution — sidecar-first, then stem heuristics."""
 
 from __future__ import annotations
 
 import json
 import os
 import re
-from pathlib import Path
 
 
 def sidecar_path(cfg: dict, stem: str) -> str:
@@ -28,13 +27,15 @@ def save_sidecar(cfg: dict, stem: str, meta: dict) -> str:
     return path
 
 
-def parse_kims_filename(stem: str) -> dict | None:
-    """Legacy KIMS filename format (royalbhrn in stem)."""
-    if "royalbhrn" not in stem.lower():
+def parse_legacy_filename(stem: str) -> dict | None:
+    """Optional legacy hospital filename format (compat only — not product default)."""
+    marker = (stem or "").lower()
+    if "royalbhrn" not in marker:
         return None
     parts = stem.split("_")
     result = {
         "agent_name": "Unknown",
+        "site": "",
         "hospital": "",
         "direction": "",
         "phone": "",
@@ -49,9 +50,9 @@ def parse_kims_filename(stem: str) -> dict | None:
         pass
     parts_upper = [p.upper() for p in parts]
     if "KIMS" in parts_upper:
-        result["hospital"] = "KIMS"
+        result["site"] = result["hospital"] = "KIMS"
     elif "RBH" in parts_upper:
-        result["hospital"] = "RBH"
+        result["site"] = result["hospital"] = "RBH"
     for p in parts:
         if p.lower() in ("inbound", "outbound"):
             result["direction"] = p.capitalize()
@@ -67,20 +68,25 @@ def parse_kims_filename(stem: str) -> dict | None:
     return result
 
 
+# Back-compat alias
+parse_kims_filename = parse_legacy_filename
+
+
 def resolve(cfg: dict, stem: str, audio_path: str | None = None) -> dict:
-    """Sidecar first; fall back to KIMS filename parse or minimal stub."""
+    """Sidecar first; then optional legacy parse; then product stem pattern."""
     sidecar = load_sidecar(cfg, stem)
     if sidecar:
         return sidecar
 
-    parsed = parse_kims_filename(stem)
-    if parsed:
-        parsed["filename"] = f"{stem}.mp3"
-        if audio_path:
-            parsed["audio_path"] = audio_path
-        return parsed
+    if cfg.get("enable_legacy_filename_parse"):
+        parsed = parse_legacy_filename(stem)
+        if parsed:
+            parsed["filename"] = f"{stem}.mp3"
+            if audio_path:
+                parsed["audio_path"] = audio_path
+            return parsed
 
-    # Rainbow stem: AgentSlug_bucket_date_callId8
+    # Product stem: AgentSlug_bucket_date_callId8
     m = re.match(
         r"^(?P<agent>.+)_(?P<bucket>b23|b46|b7p)_(?P<date>\d{4}-\d{2}-\d{2})_(?P<cid>[a-f0-9]+)$",
         stem,
@@ -94,11 +100,13 @@ def resolve(cfg: dict, stem: str, audio_path: str | None = None) -> dict:
         call_date = m.group("date")
         duration_bucket = m.group("bucket")
 
+    site = cfg.get("site_name") or cfg.get("hospital_name") or ""
     return {
         "filename": f"{stem}.mp3",
         "audio_path": audio_path or "",
         "agent_name": agent_name,
-        "hospital": "Rainbow",
+        "site": site,
+        "hospital": site,
         "call_date": call_date,
         "duration_bucket": duration_bucket,
     }

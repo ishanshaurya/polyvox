@@ -1,8 +1,8 @@
-# Healthcare call center QA rubric pack
-analysis_profile: healthcare
-analysis_template: healthcare
-domain_label: "healthcare call center"
-subject_label: "patient"
+# Generic contact center QA rubric (vertical-neutral starter pack)
+analysis_profile: generic
+analysis_template: generic
+domain_label: "contact center"
+subject_label: "customer"
 
 agent_eval_min_calls: 3
 claude_model: "claude-sonnet-4-5"
@@ -15,13 +15,23 @@ rating_bands:
   1: 0
 
 training_modules:
-  - "Patient Communication Fundamentals"
-  - "Empathy & Emotional Intelligence in Healthcare"
+  - "Customer Communication Fundamentals"
+  - "Empathy & Emotional Intelligence"
   - "De-escalation & Conflict Resolution"
   - "Active Listening Skills"
   - "Professional Conduct & Telephone Etiquette"
   - "Handling Complaints & Escalations"
-  - "Clarity & Structure in Patient Instructions"
+  - "Clarity & Structure in Customer Instructions"
+
+disposition_rules:
+  - needles: ["Resolved", "Completed", "Closed"]
+    outcome: "Resolved"
+  - needles: ["Followup", "Follow-up", "Callback", "Pending"]
+    outcome: "Follow-up Required"
+  - needles: ["Dropped", "Disconnected", "No_Response", "No Answer"]
+    outcome: "Unresolved"
+  - needles: ["Wrong_Number", "NotQualified", "Spam"]
+    outcome: "Wrong Number"
 
 kpis:
   - name: Call Opening & Closing
@@ -30,12 +40,12 @@ kpis:
   - name: Tone and Energy
     weight: 11
     description: "Appropriate enthusiasm and engagement; not flat or robotic."
-  - name: Patient Friendliness
+  - name: Customer Friendliness
     weight: 11
-    description: "Warm, welcoming tone; patient feels valued."
+    description: "Warm, welcoming tone; customer feels valued."
   - name: Empathy
     weight: 11
-    description: "Acknowledges patient feelings before solutions."
+    description: "Acknowledges customer feelings before solutions."
   - name: Active Listening
     weight: 11
     description: "Does not interrupt; asks clarifying questions."

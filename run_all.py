@@ -140,26 +140,26 @@ def build_email_summary(cfg):
     divider = "─" * 55
 
     plain = (
-        f"KIMSHEALTH CALL CENTER QA — REPORT SUMMARY\n"
+        f"POLYVOX CALL CENTER QA — REPORT SUMMARY\n"
         f"Generated: {generated}\n"
         f"{divider}\n\n"
         f"  Total calls analyzed:      {total}\n"
         f"  Average overall score:     {avg_score}/100\n"
         f"  Escalations flagged:       {len(escalations)}\n"
-        f"  Patient complaints:        {complaints_count}\n"
+        f"  Customer complaints:       {complaints_count}\n"
         f"  Appointment requests:      {len(requested)}  |  Converted: {len(converted)}  ({conv_pct})\n"
         f"  Surgical enquiries:        {len(surgical)}\n\n"
         f"AGENT BREAKDOWN:\n"
         f"{divider}\n"
         f"{agent_rows_txt}\n"
         f"{divider}\n"
-        f"All 7 Excel reports are attached.\n"
+        f"Excel reports are attached.\n"
     )
 
     html = f"""
 <html><body style="font-family:Arial,sans-serif;color:#1f3864;max-width:700px">
 <div style="background:#1f3864;padding:18px 24px;border-radius:6px 6px 0 0">
-  <h2 style="color:#fff;margin:0">KIMSHEALTH Call Center QA Report</h2>
+  <h2 style="color:#fff;margin:0">PolyVox Call Center QA Report</h2>
   <p style="color:#ccc;margin:4px 0 0">Generated: {generated}</p>
 </div>
 <div style="background:#f2f2f2;padding:16px 24px;border-bottom:3px solid #2e75b6">
@@ -205,7 +205,7 @@ def build_email_summary(cfg):
   </table>
 </div>
 <div style="padding:8px 24px 16px;font-size:12px;color:#888">
-  All 7 Excel reports are attached to this email.
+  Excel reports are attached to this email.
 </div>
 </body></html>
 """
@@ -326,8 +326,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     print("\n" + "═" * 60)
-    print("  KIMSHEALTH CALL CENTER QA PIPELINE")
-    print("  Powered by OpenAI Whisper + Claude AI")
+    print("  POLYVOX CALL CENTER QA PIPELINE")
+    print("  ASR cascade + Claude QA scoring")
     print("═" * 60)
 
     check_dependencies()

@@ -1,10 +1,11 @@
-analysis_template: healthcare
+analysis_template: generic
 report_template: templates_v1
 
 csv_path: "./data/calls.csv"
 recordings_folder: "./recordings"
 output_folder: "./outputs"
 analysis_profile: generic
+site_name: "Acme Org"
 
 pilot_agents:
   - Agent Alpha

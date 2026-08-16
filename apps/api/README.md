@@ -1,6 +1,6 @@
 # PolyVox API
 
-White-glove product API scaffold. See `docs/HOSTING.md` and `docs/ARCHITECTURE.md`.
+White-glove product API. See `docs/HOSTING.md`, `docs/PLAN.md`.
 
 ## Run
 
@@ -13,12 +13,17 @@ uvicorn app.main:app --reload --port 8000
 
 Open http://127.0.0.1:8000/docs
 
-## Endpoints (v0)
+## Endpoints (v1)
 
-- `GET /health`
-- `POST /v1/projects` — create engagement + local workspace
-- `GET /v1/projects`
-- `GET /v1/projects/{id}`
-- `POST /v1/projects/{id}/mark/{status}` — created|ingested|running|ready|purged
+- `POST /v1/projects` — create engagement + workspace + DB row
+- `GET /v1/projects`, `GET /v1/projects/{id}`
+- `POST /v1/projects/{id}/cdr` — upload CDR file
+- `POST /v1/projects/{id}/recordings` — upload `.mp3` or `.zip`
+- `POST /v1/projects/{id}/run?step=all` — queue/run worker
+- `GET /v1/projects/{id}/jobs`
+- `GET /v1/projects/{id}/calls`, `GET /v1/calls/{id}`
+- `GET /v1/projects/{id}/export.xlsx`
+- `GET /v1/rubrics`
+- `POST /v1/projects/{id}/purge-media`
 
-Project workspaces are created under `POLYVOX_DATA_ROOT` (default `./.polyvox_data`).
+SQLite DB default: `POLYVOX_DATABASE_URL=sqlite:///./.polyvox_data/polyvox.db`

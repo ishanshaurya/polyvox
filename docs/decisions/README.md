@@ -12,5 +12,6 @@ Each file states the context, the decision, the consequences, and what would jus
 | [0004](0004-vertical-neutral-rubric-packs.md) | Vertical-neutral product; healthcare is one rubric pack | Locked | 2026-08-16 |
 | [0005](0005-web-primary-excel-export.md) | Web is the primary report surface; Excel is an export | Locked | 2026-08-16 |
 | [0006](0006-repo-skills-for-cloud-agents.md) | Commit agent skills to the repo for cloud agents | Locked | 2026-08-16 |
+| [0007](0007-phase0-intake-rubric-ui.md) | Intake = URL+ZIP; second rubric = generic; Phase 1 UI = API+shell | Locked | 2026-08-16 |
 
 Open questions live in [../DESIGN_CONFIRMATION.md](../DESIGN_CONFIRMATION.md). The phase plan is [../PLAN.md](../PLAN.md).
