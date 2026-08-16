@@ -14,6 +14,7 @@ __pycache__/
 # Node
 node_modules/
 apps/web/dist/
+*.tsbuildinfo
 
 # Secrets and local overrides
 .env
@@ -21,7 +22,9 @@ config.local.yaml
 
 # OS / editor
 .DS_Store
-.cursor/
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
 
 # Logs
 *.log
