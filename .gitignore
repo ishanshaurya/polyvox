@@ -3,12 +3,17 @@ recordings/
 outputs/
 recordings_*/
 outputs_*/
+.polyvox_data/
 
 # Python
 .venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Node
+node_modules/
+apps/web/dist/
 
 # Secrets and local overrides
 .env
@@ -31,5 +36,5 @@ data/*
 PIPELINE_RUNBOOK.md
 REFINE_ANALYSIS.md
 _push_audit.txt
-src/
+/src/
 templates/kims.yaml

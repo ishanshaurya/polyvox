@@ -82,6 +82,13 @@ Details: `PIPELINE_RUNBOOK.md` · unclear recordings: `REFINE_ANALYSIS.md`
 polyvox/
 ├── 0_fetch_csv.py … 3_report.py
 ├── packages/callqa/       # ingestion, transcription, analysis, reports
+├── apps/api/              # FastAPI product surface (scaffold)
+├── apps/web/              # React UI shell (scaffold)
+├── apps/worker/           # Pipeline worker stub
+├── design/                # Drop UI designs here
 ├── config.yaml
 └── templates/healthcare.yaml
 ```
+
+Hosting / retention (white-glove, short retention): see `docs/HOSTING.md`.  
+Architecture: `docs/ARCHITECTURE.md`.
