@@ -1,7 +1,8 @@
 # Hosting decision (locked)
 
 **Date locked:** 2026-08-16  
-**Applies to:** Phase 0–1 product framework (pre–self-serve SaaS)
+**Applies to:** Phase 0–1 product framework (pre–self-serve SaaS)  
+**Formal record:** [decisions/0001-hosting-white-glove-short-retention.md](decisions/0001-hosting-white-glove-short-retention.md)
 
 ## Decision
 

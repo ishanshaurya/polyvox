@@ -31,3 +31,12 @@ White-glove + short retention (see [HOSTING.md](HOSTING.md)):
 2. Worker: call existing `1_transcribe` / `2_analyze` / `3_report` for a project path
 3. Web: pages from `design/` against API
 4. Later: auth, Postgres, self-serve upload
+
+## Planning documents
+
+| Document | Purpose |
+|---|---|
+| [PLAN.md](PLAN.md) | Phase-wise rebuild plan, architecture review, tech stack per phase |
+| [DESIGN_CONFIRMATION.md](DESIGN_CONFIRMATION.md) | Open design questions awaiting sign-off |
+| [decisions/](decisions) | Locked decisions, not to be re-litigated |
+| [HOSTING.md](HOSTING.md) | Hosting and retention policy |
