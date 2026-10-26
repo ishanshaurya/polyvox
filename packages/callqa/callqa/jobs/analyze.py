@@ -131,12 +131,11 @@ def analyze_batch(
                     result["star_rating"] = None
                 else:
                     kpi = result.get("kpi_scores") or {}
-                    overall = result.get("overall_score")
-                    if overall in (None, ""):
-                        overall = weighted_overall(kpi, cfg)
-                    if overall is not None:
-                        result["overall_score"] = overall
-                        result["star_rating"] = score_to_stars(float(overall), cfg)
+                    overall = weighted_overall(kpi, cfg)
+                    result["overall_score"] = overall
+                    result["star_rating"] = (
+                        score_to_stars(overall, cfg) if overall is not None else None
+                    )
 
                 result["analyzed_at"] = datetime.now().isoformat()
                 result["_tokens"] = {

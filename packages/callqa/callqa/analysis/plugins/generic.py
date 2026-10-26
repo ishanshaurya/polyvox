@@ -89,8 +89,6 @@ Return ONLY this JSON:
   "call_summary": "3-4 sentence factual summary or empty if unclear",
   "patient_issue": "one sentence or empty if unclear",
   "kpi_scores": {json.dumps(kpi_json, indent=4)},
-  "overall_score": "weighted average 0-100 or null if unclear",
-  "star_rating": "1-5 or null if unclear",
   "escalation_required": true | false,
   "escalation_severity": "None" | "Low" | "Medium" | "High" | "Critical",
   "escalation_reason": "behavioral reason or empty",

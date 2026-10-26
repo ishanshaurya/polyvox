@@ -11,6 +11,7 @@ from pathlib import Path
 
 from openpyxl import Workbook
 
+from callqa.analysis.scorer import score_to_stars
 from callqa.config.loader import agent_eval_min_calls
 from callqa.state import manifest, metadata
 from . import styles as S
@@ -213,7 +214,7 @@ def build_agent_evaluations(wb, records, cfg, min_calls: int = 3):
             status = "Complete"
             scores = [float(c["overall_score"]) for c in calls]
             avg = round(sum(scores) / n, 1)
-            stars = S.stars_str(round(avg / 20))
+            stars = S.stars_str(score_to_stars(avg, cfg))
             kpi_avgs = []
             for k in kpi_names:
                 vals = []
