@@ -58,22 +58,22 @@ def test_normalize_xlsx_row():
 
 
 def test_last_arrow_agent():
-    flow = "Queue -> Agent Dials (Afshan Sultana) -> Agent Dials (Obaidullah)"
-    assert fetch.last_arrow_agent(flow) == "Obaidullah"
+    flow = "Queue -> Agent Dials (Agent Alpha) -> Agent Dials (Agent Beta)"
+    assert fetch.last_arrow_agent(flow) == "Agent Beta"
 
 
 def test_resolve_final_agent_prefers_cleaned_column():
     row = {
-        "Agent (cleaned)": "Akula Varsha",
-        "Call Flow": "Queue -> Agent Dials (Someone Else)",
-        "Agent": "Someone Else",
+        "Agent (cleaned)": "Agent Gamma",
+        "Call Flow": "Queue -> Agent Dials (Agent Delta)",
+        "Agent": "Agent Delta",
     }
-    assert fetch.resolve_final_agent(row, "Agent (cleaned)") == "Akula Varsha"
+    assert fetch.resolve_final_agent(row, "Agent (cleaned)") == "Agent Gamma"
 
 
 def test_resolve_final_agent_falls_back_to_last_arrow():
     row = {
-        "Call Flow": "Queue -> Agent Dials (Afshan Sultana) -> Agent Dials (Parigi Janardhan)",
-        "Agent": "Afshan Sultana",
+        "Call Flow": "Queue -> Agent Dials (Agent Alpha) -> Agent Dials (Agent Epsilon)",
+        "Agent": "Agent Alpha",
     }
-    assert fetch.resolve_final_agent(row, None) == "Parigi Janardhan"
+    assert fetch.resolve_final_agent(row, None) == "Agent Epsilon"

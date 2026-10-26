@@ -7,6 +7,7 @@ import csv
 import datetime as dt
 import hashlib
 import math
+import os
 import re
 from datetime import date, datetime
 from pathlib import Path
@@ -425,10 +426,16 @@ def download_mp3(url: str, dest: Path) -> None:
     url = normalize_recording_url(url)
     resp = requests.get(url, timeout=120, stream=True)
     resp.raise_for_status()
-    with open(dest, "wb") as f:
-        for chunk in resp.iter_content(chunk_size=65536):
-            if chunk:
-                f.write(chunk)
+    part = dest.with_name(dest.name + ".part")
+    try:
+        with open(part, "wb") as f:
+            for chunk in resp.iter_content(chunk_size=65536):
+                if chunk:
+                    f.write(chunk)
+        os.replace(part, dest)
+    except BaseException:
+        part.unlink(missing_ok=True)
+        raise
 
 
 def run_fetch(cfg: dict, *, dry_run: bool = False) -> None:

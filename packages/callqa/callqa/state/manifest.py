@@ -25,8 +25,10 @@ def load(cfg: dict) -> dict:
 def save(cfg: dict, data: dict) -> None:
     path = manifest_path(cfg)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp, path)
 
 
 def find_call(data: dict, stem: str) -> dict | None:

@@ -12,10 +12,10 @@ from callqa.transcription import asr_gate, normalize
 from callqa.transcription.engine import attempt_acceptable
 
 LEGACY_EXPECTED = {
-    "Suneetha_Aithabathula_b23_2026-05-04_0c6d00d9": True,
-    "Nayak_Jaisree_b23_2026-05-03_85d4af70": True,
-    "Jennifer_Franchise_Pillay_b23_2026-05-20_d8f3d9a9": False,
-    "Venkata_Nagalakshmi_b23_2026-05-03_85d4af70": False,
+    "Agent_Alpha_b23_2026-05-04_0c6d00d9": True,
+    "Agent_Beta_b23_2026-05-03_85d4af70": True,
+    "Agent_Gamma_b23_2026-05-20_d8f3d9a9": False,
+    "Agent_Delta_b23_2026-05-03_85d4af70": False,
 }
 
 FIXTURES_PATH = Path(__file__).with_name("test_asr_fixtures.json")

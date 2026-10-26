@@ -23,8 +23,10 @@ def load_sidecar(cfg: dict, stem: str) -> dict | None:
 def save_sidecar(cfg: dict, stem: str, meta: dict) -> str:
     path = sidecar_path(cfg, stem)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2, ensure_ascii=False)
+    os.replace(tmp, path)
     return path
 
 
