@@ -79,8 +79,8 @@ cp .env.example .env   # ANTHROPIC_API_KEY, GROQ_API_KEY
 
 # Add your telephony CSV at data/calls.csv (see data/README.md)
 python 0_fetch_csv.py --dry-run
-python run_all.py          # small cohorts
-./run_pipeline.sh          # large cohorts
+python 0_fetch_csv.py
+./run_pipeline.sh
 ```
 
 ---

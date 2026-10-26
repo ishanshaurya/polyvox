@@ -45,6 +45,10 @@ def calls_for_batch(data: dict, batch: int | None = None) -> list[dict]:
     return [c for c in calls if c.get("batch") == batch]
 
 
+def max_batch(data: dict) -> int:
+    return max((c.get("batch", 0) for c in data.get("calls", [])), default=0)
+
+
 def update_call(data: dict, stem: str, **fields: Any) -> dict:
     call = find_call(data, stem)
     if call is None:
